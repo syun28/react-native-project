@@ -22,6 +22,7 @@ let styles = StyleSheet.create({
         paddingBottom: 16,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        flexWrap: 'wrap'
     },
     liContainer: {
         flex: 2,
@@ -29,10 +30,14 @@ let styles = StyleSheet.create({
     liText: {
         color: '#333',
         fontSize: 16,
+        flex: 0.5
+
     },
     liValue: {
         color: '#333',
         fontSize: 16,
+        flex: 0.5,
+        textAlign: 'right'
     },
     navbar: {
         alignItems: 'center',
@@ -68,12 +73,54 @@ let styles = StyleSheet.create({
     },
     action: {
         backgroundColor: constants.actionColor,
-        borderColor: 'transparent',
+        borderColor: 'black',
         borderWidth: 1,
         paddingLeft: 16,
         paddingTop: 14,
         paddingBottom: 16,
     },
+    disabled: {
+        backgroundColor: '#adadad',
+        borderColor: 'black',
+        borderWidth: 1,
+        paddingLeft: 16,
+        paddingTop: 14,
+        paddingBottom: 16,
+        color: '#000'
+    },
+    limitSafe: {
+        borderBottomColor: '#eee',
+        borderWidth: 1,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 14,
+        paddingBottom: 16,
+        fontSize: 20,
+        textAlign: 'center',
+        backgroundColor: '#02ce16'
+    },
+    limitWarning: {
+        borderBottomColor: '#eee',
+        borderWidth: 1,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 14,
+        paddingBottom: 16,
+        fontSize: 20,
+        textAlign: 'center',
+        backgroundColor: '#fff600'
+    },
+    limitDanger: {
+        borderBottomColor: '#eee',
+        borderWidth: 1,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 14,
+        paddingBottom: 16,
+        fontSize: 20,
+        textAlign: 'center',
+        backgroundColor: '#ff0000'
+    }
 });
 
 module.exports = styles;
