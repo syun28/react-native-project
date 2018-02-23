@@ -17,13 +17,20 @@ let styles = StyleSheet.create({
         borderColor: 'transparent',
         borderWidth: 1,
         paddingLeft: 16,
+        paddingRight: 16,
         paddingTop: 14,
         paddingBottom: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     liContainer: {
         flex: 2,
     },
     liText: {
+        color: '#333',
+        fontSize: 16,
+    },
+    liValue: {
         color: '#333',
         fontSize: 16,
     },
@@ -35,9 +42,14 @@ let styles = StyleSheet.create({
         borderWidth: 1,
         justifyContent: 'center',
         height: 44,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     navbarTitle: {
+        color: '#444',
+        fontSize: 16,
+        fontWeight: "500"
+    },
+    navbarValue: {
         color: '#444',
         fontSize: 16,
         fontWeight: "500"

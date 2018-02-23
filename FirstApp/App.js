@@ -40,6 +40,8 @@ export default class FirstApp extends Component {
             })
         };
         this.itemsRef = this.getRef().child('items');
+        console.ignoredYellowBox = ['Remote debugger'];
+        console.ignoredYellowBox = ['FIREBASE WARNING: Invalid query string segment:'];
     }
 
     getRef() {
@@ -54,12 +56,14 @@ export default class FirstApp extends Component {
             snap.forEach((child) => {
                 items.push({
                     title: child.val().title,
+                    value: child.val().value,
                     _key: child.key
                 });
             });
 
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(items)
+                dataSource: this.state.dataSource.cloneWithRows(items),
+                totalExpense: this.totalExpense(items)
             });
 
         });
@@ -73,18 +77,33 @@ export default class FirstApp extends Component {
         return (
             <View style={styles.container}>
 
-                <StatusBar title="Grocery List" />
-
+                <StatusBar title="Expenses - Tap Items for Actions" />
+                <StatusBar title={this.state.totalExpense} />
                 <ListView
                     dataSource={this.state.dataSource}
                     renderRow={this._renderItem.bind(this)}
                     enableEmptySections={true}
                     style={styles.listview}/>
 
-                <ActionButton onPress={this._addItem.bind(this)} title="Add" />
+                <ActionButton onPress={this._addItem.bind(this)} title="Add New Item" />
 
             </View>
+
         )
+    }
+
+    totalExpense(items) {
+        let sign = "$";
+        let total = 0;
+        items.forEach(function(element) {
+            total += parseInt(element.value);
+        });
+        if(total > 0) {
+            return sign.concat(total.toString());
+        }
+        else {
+            return "$0";
+        }
     }
 
     _addItem() {
@@ -107,11 +126,12 @@ export default class FirstApp extends Component {
     _renderItem(item) {
 
         const onPress = () => {
-            AlertIOS.alert(
-                'Complete',
+            AlertIOS.prompt(
+                'Actions:',
                 null,
                 [
-                    {text: 'Complete', onPress: (text) => this.itemsRef.child(item._key).remove()},
+                    {text: 'Add/Change Expense', onPress: (text) => this.itemsRef.child(item._key).update({value: text})},
+                    {text: 'Remove Expense', onPress: (text) => this.itemsRef.child(item._key).remove()},
                     {text: 'Cancel', onPress: (text) => console.log('Cancelled')}
                 ]
             );
