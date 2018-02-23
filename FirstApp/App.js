@@ -60,7 +60,6 @@ export default class FirstApp extends Component {
                     _key: child.key
                 });
             });
-            console.log(items);
 
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(items),
