@@ -9,6 +9,7 @@ class ListItem extends Component {
             <TouchableHighlight onPress={this.props.onPress}>
                 <View style={styles.li}>
                     <Text style={styles.liText}>{this.props.item.title}</Text>
+                    <Text style={styles.liValue}>${this.props.item.value}</Text>
                 </View>
             </TouchableHighlight>
         );
