@@ -96,7 +96,7 @@ export default class FirstApp extends Component {
 
                 <StatusBar title="Expenses - Tap Items for Actions" />
                 {this.state.totalExpense < this.state.limitExpense ? <Text style={styles.limitSafe}>${this.state.totalExpense} out of ${this.state.limitExpense}</Text>: null}
-                {this.state.totalExpense == this.state.limitExpense ? <Text style={styles.limitWarning}>${this.state.totalExpense} out of ${this.state.limitExpense}</Text>: null}
+                {parseInt(this.state.totalExpense) === parseInt(this.state.limitExpense) ? <Text style={styles.limitWarning}>${this.state.totalExpense} out of ${this.state.limitExpense}</Text>: null}
                 {this.state.totalExpense > this.state.limitExpense ? <Text style={styles.limitDanger}>${this.state.totalExpense} out of ${this.state.limitExpense}</Text>: null}
                 <ListView
                     dataSource={this.state.dataSource}
