@@ -162,7 +162,15 @@ export default class FirstApp extends Component {
                 {
                     text: 'Update',
                     onPress: (text) => {
-                        this.limitRef.update({ limit: text })
+                        if(/^\d+$/.test(text)) {
+                            this.limitRef.update({limit: text})
+                        }
+                        else {
+                            AlertIOS.alert(
+                                'Only Numeric Values',
+                                null
+                            )
+                        }
                     }
                 },
             ],
@@ -177,7 +185,19 @@ export default class FirstApp extends Component {
                 'Actions:',
                 null,
                 [
-                    {text: 'Add/Change Expense', onPress: (text) => this.itemsRef.child(item._key).update({value: text})},
+                    {
+                        text: 'Add/Change Expense', onPress: (text) => {
+                            if(/^\d+$/.test(text)) {
+                                this.itemsRef.child(item._key).update({value: text})
+                            }
+                            else {
+                                AlertIOS.alert(
+                                    'Only Numeric Values',
+                                    null
+                                )
+                            }
+                        }
+                    },
                     {text: 'Remove Expense', onPress: (text) => this.itemsRef.child(item._key).remove()},
                     {text: 'Cancel', onPress: (text) => console.log('Cancelled')}
                 ]
