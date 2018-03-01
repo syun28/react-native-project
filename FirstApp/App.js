@@ -5,7 +5,8 @@
  */
 import React, {Component} from 'react';
 import ReactNative from 'react-native';
-import * as firebase from 'firebase';
+import {Provider} from 'react-redux';
+import configureStore from './src/store/configStore'
 const StatusBar = require('./components/StatusBar');
 const ActionButton = require('./components/ActionButton');
 const ListItem = require('./components/ListItem');
@@ -21,26 +22,11 @@ const {
     AlertIOS,
 } = ReactNative;
 
-// Initialize Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyAU5dV4WuyFWfHrk5ASa_vZPjGjjB1rkio",
-    authDomain: "firstapp-13b91.firebaseapp.com",
-    databaseURL: "https://firstapp-13b91.firebaseio.com",
-    storageBucket: "firstapp-13b91.appspot.com",
-};
-
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
 export default class FirstApp extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            dataSource: new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 !== row2,
-            })
-        };
-        this.itemsRef = this.getRef().child('items');
-        this.limitRef = this.getRef().child('limit');
+        firebaseInit();
+        this.store = configureStore();
         console.ignoredYellowBox = ['Remote debugger'];
         console.ignoredYellowBox = ['FIREBASE WARNING: Invalid query string segment:'];
     }
@@ -92,6 +78,7 @@ export default class FirstApp extends Component {
 
     render() {
         return (
+            <Provider store={this.store}>
             <View style={styles.container}>
 
                 <StatusBar title="Expenses - Tap Items for Actions" />
@@ -108,6 +95,7 @@ export default class FirstApp extends Component {
                 <ActionButton onPress={this._addLimit.bind(this)} title="Edit Limit" />
 
             </View>
+            </Provider>
 
         )
     }
