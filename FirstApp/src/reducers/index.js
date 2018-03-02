@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import item from './items';
+import expenses from './expenses';
+import limit from './limit';
 
 const rootReducer = combineReducers({
-    item
+    expenses,
+    limit
 });
 
 export default rootReducer;

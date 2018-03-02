@@ -25,14 +25,9 @@ const {
 export default class FirstApp extends Component {
     constructor(props) {
         super(props);
-        firebaseInit();
         this.store = configureStore();
         console.ignoredYellowBox = ['Remote debugger'];
         console.ignoredYellowBox = ['FIREBASE WARNING: Invalid query string segment:'];
-    }
-
-    getRef() {
-        return firebaseApp.database().ref();
     }
 
     listenForItems(itemsRef, limitRef) {
